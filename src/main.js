@@ -14,6 +14,30 @@
       <p>Текст</p>
   </li>
 */
-import { refs } from './js/refs';
-import handleSubmit from './js/tasks';
 
+import { refs } from './js/refs';
+import addTask from './js/tasks';
+
+refs.form.addEventListener('submit', handleSubmit);
+
+export default function handleSubmit(event) {
+  event.preventDefault();
+
+  const inputValue = event.target;
+
+  const taskName = inputValue.elements.taskName.value.trim();
+  const taskDescription = inputValue.elements.taskDescription.value.trim();
+
+  if (taskName === '' || taskDescription === '') {
+    alert('Please fill in all the fields!');
+    return;
+  }
+
+  const task = {
+    title: taskName,
+    description: taskDescription,
+  };
+
+  addTask(task);
+  refs.form.reset();
+}
