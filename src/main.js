@@ -14,3 +14,6 @@
       <p>Текст</p>
   </li>
 */
+import { refs } from './js/refs';
+import handleSubmit from './js/tasks';
+
