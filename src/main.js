@@ -17,6 +17,7 @@
 
 import { refs } from './js/refs';
 import addTask from './js/tasks';
+import renderTasks from './js/render-tasks';
 
 refs.form.addEventListener('submit', handleSubmit);
 
@@ -38,6 +39,8 @@ export default function handleSubmit(event) {
     description: taskDescription,
   };
 
-  addTask(task);
+  const tasksArray = addTask(task);
+  renderTasks(tasksArray);
+  
   refs.form.reset();
 }
