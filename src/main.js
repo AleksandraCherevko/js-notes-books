@@ -18,8 +18,10 @@
 import { refs } from './js/refs';
 import addTask from './js/tasks';
 import renderTasks from './js/render-tasks';
+import { deleteTask } from './js/tasks';
 
 refs.form.addEventListener('submit', handleSubmit);
+refs.list.addEventListener('click', handleDelete);
 
 export default function handleSubmit(event) {
   event.preventDefault();
@@ -41,6 +43,18 @@ export default function handleSubmit(event) {
 
   const tasksArray = addTask(task);
   renderTasks(tasksArray);
-  
+
   refs.form.reset();
+}
+
+function handleDelete(event) {
+  if (!event.target.classList.contains('task-list-item-btn')) {
+    return;
+  }
+
+  const taskItem = event.target.closest('.task-list-item');
+  const index = taskItem.dataset.index;
+
+  const updatedTasks = deleteTask(index);
+  renderTasks(updatedTasks);
 }
