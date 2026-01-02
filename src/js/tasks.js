@@ -1,13 +1,19 @@
-export default function addTask(tasks) {
-  const tasksArray = JSON.parse(localStorage.getItem('tasks')) || [];
-  tasksArray.push(tasks);
-  localStorage.setItem('tasks', JSON.stringify(tasksArray));
-  return tasksArray;
+import { loadTasks, saveTasks } from './local-storage-api';
+
+let tasks = loadTasks();
+
+export function getTasks() {
+  return tasks;
+}
+
+export function addTask(task) {
+  tasks.push(task);
+  saveTasks(tasks);
+  return tasks;
 }
 
 export function deleteTask(index) {
-  const tasksArray = JSON.parse(localStorage.getItem('tasks')) || [];
-  tasksArray.splice(index, 1);
-  localStorage.setItem('tasks', JSON.stringify(tasksArray));
-  return tasksArray;
+  tasks.splice(index, 1);
+  saveTasks(tasks);
+  return tasks;
 }
