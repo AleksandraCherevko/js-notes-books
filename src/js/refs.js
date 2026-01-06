@@ -5,5 +5,5 @@ export const refs = {
   list: document.querySelector('.tasks-list'),
 
   themeBtn: document.querySelector('.theme-toggle-button'),
-  container: document.querySelector('.header-container'),
+  container: document.querySelector('body'),
 };

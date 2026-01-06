@@ -1,55 +1,21 @@
-// import { refs } from './refs';
-// import { saveTheme, loadTheme } from './local-storage-api';
-
-// initTheme();
-// refs.themeBtn.addEventListener('click', onThemeToggle);
-
-// function initTheme() {
-//   const theme = loadTheme();
-//   if (theme === 'dark') {
-//     refs.container.classList.add('dark');
-//   }
-// }
-
-// function onThemeToggle() {
-//   const isDark = refs.container.classList.toggle('dark');
-//   saveTheme(isDark ? 'dark' : 'light');
-// }
-
-// theme-switcher.js
 import { saveTheme, loadTheme } from './local-storage-api';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const refs = {
-    themeBtn: document.querySelector('.theme-toggle-button'),
-    container: document.querySelector('.header'), // убедись, что класс совпадает
-  };
+  const themeBtn = document.querySelector('.theme-toggle-button');
+  const body = document.body;
 
-  if (!refs.themeBtn || !refs.container) {
-    console.error('Не найден элемент кнопки или контейнера!');
-    return;
-  }
+  const savedTheme = loadTheme();
+  body.classList.remove('theme-dark', 'theme-light');
+  body.classList.add(`theme-${savedTheme}`);
 
-  // === Инициализация темы при загрузке страницы ===
-  initTheme();
 
-  // === Слушатель кнопки ===
-  refs.themeBtn.addEventListener('click', onThemeToggle);
+  themeBtn.addEventListener('click', () => {
+    const isDark = body.classList.contains('theme-dark');
+    const newTheme = isDark ? 'light' : 'dark';
 
-  // Функция инициализации темы
-  function initTheme() {
-    const savedTheme = loadTheme(); // 'dark' или 'light'
-    if (savedTheme === 'dark') {
-      refs.container.classList.add('dark');
-    } else {
-      refs.container.classList.remove('dark');
-    }
-  }
+    body.classList.remove('theme-dark', 'theme-light');
+    body.classList.add(`theme-${newTheme}`);
 
-  // Функция переключения темы
-  function onThemeToggle() {
-    const isDark = refs.container.classList.toggle('dark');
-    const theme = isDark ? 'dark' : 'light';
-    saveTheme(theme); // сохраняем в localStorage
-  }
+    saveTheme(newTheme);
+  });
 });

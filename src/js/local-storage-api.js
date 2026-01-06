@@ -14,5 +14,5 @@ export function saveTheme(theme) {
 }
 
 export function loadTheme() {
-  return localStorage.getItem(THEME_KEY) ?? 'light';
+  return localStorage.getItem(THEME_KEY) ?? 'dark';
 }

@@ -3,7 +3,7 @@ import { addTask, deleteTask } from './js/tasks';
 import renderTasks from './js/render-tasks';
 import { loadTasks } from './js/local-storage-api';
 import './js/theme-switcher';
-// ⬇️ загрузка задач при старте
+
 renderTasks(loadTasks());
 
 refs.form.addEventListener('submit', handleSubmit);
